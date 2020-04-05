@@ -1,0 +1,34 @@
+
+  # env variables for vpc.tf 
+---------------------------------
+
+    $ export TF_VAR_cidr=10.0.0.0/16
+    $ export TF_VAR_cidr=ITI-VPC2
+
+-to remove this vars:
+
+    $ unset TF_VAR_cidr
+
+    or using dev.tfvars file
+
+
+$ terraform apply -var-file=dev.tfvars
+
+$ terraform destroy -var-file=dev.tfvars
+
+
+
+- to create workspace
+
+    $ terraform workspace new dev
+    $ terraform workspace show  // diplay that which wS i stand on it
+
+- select workspace to apply terraform
+    $ terraform workspace select dev
+
+
+- to get ip of vpc:
+
+    $ terraform output vpc_id
+
+  #aws secrete manager version
