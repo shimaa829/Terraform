@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Terraform init') { 
             steps {
-                sh 'pwd && ls && terraform init -input=false -var accessKey=\"${AWS_ACCESS_KEY_ID}\" -var secretKey=\"${AWS_SECRET_ACCESS_KEY}\" '
+                sh 'pwd && ls && terraform init  -var accessKey="${AWS_ACCESS_KEY_ID}" -var secretKey="${AWS_SECRET_ACCESS_KEY}" '
 
             }
            }
@@ -17,7 +17,7 @@ pipeline {
            
             stage('Terraform apply') { 
             steps {
-                sh 'terraform apply -var-file=dev.tfvars -input=false -auto-approve'
+                sh 'terraform apply -var-file=dev.tfvars  -auto-approve'
 
             }
            }
