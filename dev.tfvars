@@ -1,6 +1,5 @@
 main_cidr="10.0.0.0/16"
 main_tag="dev-VPC2"
-profile="default"
 region="us-east-1"
 
 cidr_pubsub1 = "10.0.1.0/24"

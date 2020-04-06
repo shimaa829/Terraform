@@ -9,9 +9,14 @@ variable "main_tag" {
 }
 
 
-variable "profile" {
+variable "accessKey" {
 
 }
+
+variable "secretKey" {
+  
+}
+
 
 
 variable "region" {

@@ -1,6 +1,5 @@
 main_cidr="127.0.0.0/16"
 main_tag="prod-vpc"
-profile="default"
 region="us-west-1"
 
 cidr_pubsub1 = "127.0.1.0/24"
