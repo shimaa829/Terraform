@@ -1,6 +1,13 @@
 pipeline {
     agent any 
+
     stages {
+         stage('Terraform destory') { 
+            steps {
+                sh 'terraform destory -var-file=dev.tfvars  -auto-approve '
+
+            }
+           }
         stage('Terraform init') { 
             steps {
                 sh 'pwd && ls && terraform init  -var accessKey="${AWS_ACCESS_KEY_ID}" -var secretKey="${AWS_SECRET_ACCESS_KEY}" '
