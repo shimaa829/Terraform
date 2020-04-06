@@ -7,13 +7,13 @@ pipeline {
 
             }
            }
-        stage('create 2 workspaces dev & prod') { 
-            steps {
-                sh 'terraform workspace new dev'
-                sh 'terraform workspace new prod'
+        // stage('create 2 workspaces dev & prod') { 
+        //     steps {
+        //         sh 'terraform workspace new dev'
+        //         sh 'terraform workspace new prod'
 
-            }
-           }
+        //     }
+        //    }
         stage('select dev workspace') { 
             steps {
                 sh 'terraform workspace select dev'
