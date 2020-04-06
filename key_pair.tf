@@ -4,7 +4,7 @@ resource "tls_private_key" "example" {
 }
 
 resource "aws_secretsmanager_secret" "privateaws" {
-  name = "private_keyaws"
+  name = "private_keyaws1"
 }
 
 
