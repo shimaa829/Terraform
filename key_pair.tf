@@ -3,13 +3,14 @@ resource "tls_private_key" "example" {
   rsa_bits = "2048"
 }
 
-resource "aws_secretsmanager_secret" "privateaws" {
-  name = "private_keyaws1"
+resource "aws_secretsmanager_secret" "privateaws4" {
+  name = "private_keyaws4"
+  recovery_window_in_days = 0
 }
 
 
 resource "aws_secretsmanager_secret_version" "example" {
-  secret_id     = "${aws_secretsmanager_secret.privateaws.id}"
+  secret_id     = "${aws_secretsmanager_secret.privateaws4.id}"
   secret_string = "${tls_private_key.example.private_key_pem}"
 }
 
