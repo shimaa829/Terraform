@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Terraform init') { 
             steps {
-                sh ' pwd && ls && terraform init -var accessKey="${env.AWS_ACCESS_KEY_ID} -var secretKey="${env.AWS_SECRET_ACCESS_KEY}"'
+                sh ' pwd && ls && terraform init -var accessKey="${env.AWS_ACCESS_KEY_ID}" -var secretKey="${env.AWS_SECRET_ACCESS_KEY}"'
 
             }
            }
