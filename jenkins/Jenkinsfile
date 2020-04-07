@@ -2,30 +2,30 @@ pipeline {
     agent any 
 
     stages {
-        // stage('Terraform destory') { 
+        stage('Terraform destory') { 
+            steps {
+                sh 'terraform destroy -var-file=dev.tfvars  -auto-approve '
+            }
+           }
+        // stage('Terraform init') { 
         //     steps {
-        //         sh 'terraform destroy -var-file=dev.tfvars  -auto-approve '
+        //         sh 'pwd && ls && terraform init  -var accessKey="${AWS_ACCESS_KEY_ID}" -var secretKey="${AWS_SECRET_ACCESS_KEY}" '
+
         //     }
         //    }
-        stage('Terraform init') { 
-            steps {
-                sh 'pwd && ls && terraform init  -var accessKey="${AWS_ACCESS_KEY_ID}" -var secretKey="${AWS_SECRET_ACCESS_KEY}" '
 
-            }
-           }
+        // stage('select dev workspace') { 
+        //     steps {
+        //         sh 'terraform workspace select dev'
 
-        stage('select dev workspace') { 
-            steps {
-                sh 'terraform workspace select dev'
-
-            }
-           }
+        //     }
+        //    }
            
-            stage('Terraform apply') { 
-            steps {
-                sh 'terraform apply -var-file=dev.tfvars  -auto-approve'
+        //     stage('Terraform apply') { 
+        //     steps {
+        //         sh 'terraform apply -var-file=dev.tfvars  -auto-approve'
 
-            }
-           }
+        //     }
+        //    }
         }
     }
