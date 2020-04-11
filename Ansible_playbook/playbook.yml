@@ -1,0 +1,18 @@
+---
+- hosts: public_subnets
+  remote_user: ec2-user
+  become: true
+
+  tasks:
+    - name: install the nginx rpm from a remote repo
+      yum:
+        name: http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+        state: present
+    - name: start nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+      
+
+    

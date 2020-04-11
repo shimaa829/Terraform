@@ -34,7 +34,7 @@ resource "aws_security_group" "dis_allow_ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "TCP"
-    cidr_blocks = ["${aws_instance.my-ec23.private_ip}/32",]
+    cidr_blocks = ["${aws_instance.my-ec23.public_ip}/32",]
   }
 
   egress {
