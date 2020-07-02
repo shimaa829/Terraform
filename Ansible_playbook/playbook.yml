@@ -2,7 +2,7 @@
 - hosts: public_subnets
   remote_user: ec2-user
   become: true
-
+  
   tasks:
     - name: install the nginx rpm from a remote repo
       yum:

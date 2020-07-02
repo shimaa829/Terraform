@@ -1,0 +1,75 @@
+---
+- hosts: nexus
+  remote_user: ec2-user
+  become: true
+  vars:
+    file_name: app
+    url_download: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+  tasks:
+  - name: ensure update & wget is installed
+    yum:
+      name:
+        - wget
+        - java-1.8.0-openjdk.x86_64
+      state: present
+      update_cache: true
+  
+  - name: create remote dir
+    file:
+        path: /{{file_name}}
+        state: directory
+
+  - name: Download NEXUS 
+    get_url:
+      url: "{{url_download}}"
+      dest: /{{file_name}}
+
+  - name: Unarchive a file that needs to be downloaded (added in 2.0)
+    unarchive:
+      src: "{{url_download}}"
+      dest: /{{file_name}}
+      remote_src: yes
+
+  - name: stat nexus-3.22.0-02 
+    stat: path=/{{file_name}}/nexus-3.*
+    register: nexus_stat
+
+  - name:  Move nexus-3.22.0-02 to nexus
+    command: mv /{{file_name}}/nexus-3.*  /{{file_name}}/nexus
+    when: nexus_stat.stat.exists
+
+  - name : create user nexus
+    user: 
+        name: "{{item}}"
+        state: present
+    with_items:
+         - nexus
+  
+  - name: Change file ownership
+    file:
+      path: 
+        - /{{file_name}}/nexus
+        - /{{file_name}}/sonatype-work
+      owner: nexus
+      state: directory
+      
+  - lineinfile:
+      path: /{{file_name}}/nexus/bin/nexus.rc
+      regexp: '^#run_as_user="nexus"'
+      line: 'run_as_user="nexus"'
+      state: present
+
+  - name: Copy a "nexus" file on the remote machine for editing
+    copy:
+      src: nexus.service
+      dest: /etc/systemd/system/
+      owner: nexus
+
+  - name: add nexus service to boot
+    command: chkconfig nexus on
+    
+  
+  - name: start nexus service
+    systemd:
+      name: nexus
+      state: started
